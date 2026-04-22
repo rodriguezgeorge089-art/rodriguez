@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Odhiambo Rodriguez George – Finance student, certified Project Manager, and app creator based in Nairobi.">
+  <meta property="og:title" content="Rodriguez George · Finance & Project Management">
+  <meta property="og:description" content="Finance student & Project Manager building financial solutions and apps.">
+  <meta property="og:image" content="https://ui-avatars.com/api/?name=Odhiambo+Rodriguez+George&background=2563eb&color=fff&size=600&bold=true">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Odhiambo Rodriguez George · Finance & PM</title>
+  <!-- Premium fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+  <style>
+    /* ===== CSS (same as before) ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gradient-light: linear-gradient(145deg, #f8fafc 0%, #eef2ff 50%, #f4f6fb 100%);
+      --gradient-dark: linear-gradient(145deg, #0b0f19 0%, #1a1a3a 50%, #0f172a 100%);
+      --surface-light: rgba(255, 255, 255, 0.75);
+      --surface-dark: rgba(20, 28, 45, 0.85);
+      --text-primary: #0a0f1c;
+      --text-secondary: #334155;
+      --accent: #2563eb;
+      --accent-secondary: #8b5cf6;
+      --border-light: rgba(0, 0, 0, 0.06);
+      --border-dark: rgba(255, 255, 255, 0.08);
+      --shadow-sm: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+      --radius-card: 28px;
+      --radius-btn: 50px;
+      --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    body.dark {
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border-light: var(--border-dark);
+      --surface-light: var(--surface-dark);
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--gradient-light);
+      color: var(--text-primary);
+      line-height: 1.6;
+      transition: background 0.4s, color 0.2s;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body.dark { background: var(--gradient-dark); }
+
+    /* Custom Cursor */
+    @media (pointer: fine) {
+      body.custom-cursor-active { cursor: none; }
+      .cursor-dot, .cursor-outline {
+        pointer-events: none; position: fixed; top: 0; left: 0; border-radius: 50%;
+        z-index: 9999; will-change: transform; transition: width 0.2s, height 0.2s, background 0.2s, border 0.2s;
+        display: none;
+      }
+      body.custom-cursor-active .cursor-dot,
+      body.custom-cursor-active .cursor-outline { display: block; }
+      .cursor-dot { width: 6px; height: 6px; background: var(--accent); transform: translate(-50%, -50%); }
+      .cursor-outline { width: 36px; height: 36px; border: 2px solid var(--accent); opacity: 0.5; transform: translate(-50%, -50%); transition: transform 0.05s ease-out; }
+      .cursor-outline.hover { width: 50px; height: 50px; border-color: var(--accent-secondary); opacity: 0.8; }
+      .cursor-dot.hover { background: var(--accent-secondary); width: 10px; height: 10px; }
+    }
+
+    body::after {
+      content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L35 15 L45 10 L40 20 L50 25 L40 30 L50 35 L40 40 L45 50 L35 45 L30 55 L25 45 L15 50 L20 40 L10 35 L20 30 L10 25 L20 20 L15 10 L25 15 L30 5Z' fill='none' stroke='rgba(37,99,235,0.03)' stroke-width='2'/%3E%3C/svg%3E");
+      background-size: 60px 60px; pointer-events: none; z-index: -1; opacity: 0.3;
+    }
+    body.dark::after { opacity: 0.15; }
+
+    .bg-blob {
+      position: fixed; width: 60vw; height: 60vw; border-radius: 50%;
+      filter: blur(80px); z-index: -2; pointer-events: none; opacity: 0.5;
+      animation: floatBlob 20s infinite alternate ease-in-out;
+    }
+    .blob-1 { top: -20vh; left: -10vw; background: radial-gradient(circle, #3b82f6, transparent 70%); }
+    .blob-2 { bottom: -10vh; right: -5vw; width: 50vw; height: 50vw; background: radial-gradient(circle, #8b5cf6, transparent 70%); animation-duration: 25s; }
+    .blob-3 { top: 40vh; left: 60vw; width: 30vw; height: 30vw; background: radial-gradient(circle, #ec4899, transparent 70%); opacity: 0.3; animation-duration: 18s; }
+    @keyframes floatBlob {
+      0% { transform: translate(0,0) scale(1); }
+      100% { transform: translate(5%,5%) scale(1.1); }
+    }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; position: relative; }
+    .fade-section {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-section.visible { opacity: 1; transform: translateY(0); }
+
+    h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+    h1 { font-size: clamp(2.8rem, 7vw, 4.5rem); margin-bottom: 1rem; }
+    h2 { font-size: 2.2rem; margin-bottom: 2rem; position: relative; display: inline-block; }
+    h2:after {
+      content: ''; position: absolute; bottom: -10px; left: 0; width: 60px; height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-secondary)); border-radius: 4px;
+    }
+
+    .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .section-icon {
+      font-size: 2rem; color: var(--accent); background: rgba(37,99,235,0.1);
+      width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 16px;
+    }
+
+    .gradient-name {
+      background: linear-gradient(135deg, #2563eb, #8b5cf6, #ec4899, #2563eb);
+      background-size: 300% 300%; -webkit-background-clip: text; background-clip: text;
+      color: transparent; animation: gradientFlow 8s ease infinite; font-weight: 800;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; }
+    }
+
+    .navbar {
+      display: flex; justify-content: space-between; align-items: center; padding: 1rem 0;
+      margin-top: 0.5rem; flex-wrap: wrap; gap: 1.5rem;
+      border-bottom: 1px solid var(--border-light); backdrop-filter: blur(8px);
+    }
+    .logo {
+      font-size: 1.8rem; font-weight: 800; letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-weight: 600; font-size: 0.95rem; color: var(--text-secondary);
+      transition: var(--transition); padding-bottom: 6px; border-bottom: 2px solid transparent;
+    }
+    .nav-links a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    .action-buttons { display: flex; gap: 0.5rem; }
+
+    .btn-icon {
+      background: var(--surface-light); backdrop-filter: blur(8px); border: 1px solid var(--border-light);
+      padding: 0.5rem 1.2rem; border-radius: var(--radius-btn); font-weight: 600; font-size: 0.85rem;
+      color: var(--text-primary); cursor: pointer; transition: var(--transition);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-icon:hover { border-color: var(--accent); background: var(--accent); color: white; }
+    .btn-icon.admin-active { background: var(--accent); color: white; border-color: var(--accent); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary)); color: white;
+      border: none; padding: 0.9rem 2rem; border-radius: var(--radius-btn);
+      font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: var(--transition);
+      display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 8px 20px rgba(37,99,235,0.25);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(37,99,235,0.4); }
+
+    .btn-outline {
+      background: transparent; border: 1.5px solid var(--border-light); padding: 0.9rem 2rem;
+      border-radius: var(--radius-btn); font-weight: 600; color: var(--text-primary);
+      cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 10px;
+      backdrop-filter: blur(8px);
+    }
+    .btn-outline:hover { border-color: var(--accent); background: rgba(37,99,235,0.05); }
+
+    .hero {
+      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: center;
+      padding: 3rem 0 4rem;
+    }
+    .hero-badge {
+      display: inline-block; background: rgba(37,99,235,0.1); backdrop-filter: blur(8px);
+      color: var(--accent); font-weight: 600; font-size: 0.8rem; padding: 0.3rem 1.2rem;
+      border-radius: 40px; margin-bottom: 1.5rem; border: 1px solid rgba(37,99,235,0.2);
+    }
+    #typed-role { font-weight: 700; }
+    .hero p { font-size: 1.15rem; color: var(--text-secondary); max-width: 550px; margin: 1.2rem 0 1.8rem; }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .profile-frame {
+      width: 300px; height: 300px; border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+      background: linear-gradient(145deg, var(--accent), var(--accent-secondary), #ec4899);
+      padding: 5px; box-shadow: 0 0 30px rgba(37,99,235,0.2), var(--shadow-md);
+      animation: morphing 12s infinite alternate;
+    }
+    @keyframes morphing {
+      0% { border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%; }
+      100% { border-radius: 52% 48% 70% 30% / 35% 60% 40% 65%; }
+    }
+    .profile-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; border: 4px solid rgba(255,255,255,0.9); }
+
+    .stats-mini { display: flex; gap: 2rem; margin-top: 2rem; }
+    .stat-number { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
+    .stat-label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .skills-grid, .projects-grid, .testimonials-grid, .documents-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.8rem; margin: 2rem 0;
+    }
+
+    .skill-card, .timeline-item, .project-card, .testimonial-card, .document-card, .settings-card {
+      background: var(--surface-light); backdrop-filter: blur(12px); border-radius: var(--radius-card);
+      padding: 1.8rem; box-shadow: var(--shadow-sm); border: 1px solid var(--border-light);
+      transition: var(--transition);
+    }
+    .skill-card:hover, .project-card:hover, .testimonial-card:hover, .document-card:hover, .settings-card:hover {
+      transform: translateY(-5px); box-shadow: var(--shadow-md);
+    }
+
+    .skill-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem; font-weight: 700; font-size: 1.2rem; }
+    .skill-item { margin-bottom: 1.2rem; }
+    .skill-info { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 500; margin-bottom: 5px; }
+    .progress-bar { height: 7px; background: var(--border-light); border-radius: 10px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-secondary)); border-radius: 10px; width: 0%; }
+
+    .timeline { display: flex; flex-direction: column; gap: 1.5rem; }
+    .timeline-title { font-size: 1.2rem; font-weight: 700; }
+    .timeline-date { display: inline-block; color: var(--accent); font-weight: 600; font-size: 0.75rem; margin: 0.3rem 0 0.8rem; }
+
+    .project-card i { font-size: 2rem; background: linear-gradient(135deg, var(--accent), var(--accent-secondary)); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 1rem; }
+    .project-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .featured-badge {
+      position: absolute; top: 16px; right: 16px; background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      color: white; padding: 0.2rem 0.8rem; border-radius: 30px; font-size: 0.65rem; font-weight: 700;
+    }
+    .project-card { position: relative; }
+
+    .testimonial-card i { color: var(--accent); opacity: 0.8; font-size: 1.8rem; margin-bottom: 0.8rem; }
+    .testimonial-text { font-style: italic; color: var(--text-secondary); margin-bottom: 1.2rem; }
+    .testimonial-author { font-weight: 800; }
+    .testimonial-role { font-size: 0.75rem; color: var(--text-secondary); }
+
+    .document-card i { font-size: 2.2rem; color: var(--accent); margin-bottom: 1rem; }
+    .document-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .doc-actions { display: flex; gap: 0.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .doc-btn {
+      background: transparent; border: 1px solid var(--border-light); padding: 0.4rem 1rem;
+      border-radius: 30px; font-size: 0.75rem; font-weight: 600; color: var(--text-secondary);
+      cursor: pointer; transition: var(--transition);
+    }
+    .doc-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+    .settings-card { margin-top: 2rem; }
+    .settings-card h3 { margin-bottom: 1rem; }
+    .settings-field { margin-bottom: 1rem; }
+    .settings-field label { display: block; font-size: 0.85rem; margin-bottom: 0.3rem; color: var(--text-secondary); }
+    .settings-field input {
+      width: 100%; padding: 0.6rem 1rem; border: 1.5px solid var(--border-light); border-radius: 20px;
+      background: rgba(255,255,255,0.6); color: var(--text-primary); font-family: inherit;
+    }
+    body.dark .settings-field input { background: rgba(15,23,42,0.8); }
+
+    .contact-form { max-width: 680px; margin: 2rem auto; background: var(--surface-light); backdrop-filter: blur(12px); border-radius: var(--radius-card); padding: 2rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group input, .form-group textarea {
+      width: 100%; padding: 0.9rem 1.2rem; border: 1.5px solid var(--border-light); border-radius: 20px;
+      background: rgba(255,255,255,0.6); color: var(--text-primary); font-family: inherit;
+    }
+    body.dark .form-group input, body.dark .form-group textarea { background: rgba(15,23,42,0.8); }
+    .submit-btn {
+      width: 100%; background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      color: white; border: none; padding: 0.9rem; border-radius: 40px; font-weight: 700;
+    }
+    .contact-options { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; margin-top: 1.5rem; }
+    .contact-option-btn {
+      background: var(--surface-light); border: 1px solid var(--border-light); padding: 0.6rem 1.5rem;
+      border-radius: 40px; text-decoration: none; color: var(--text-primary); font-weight: 600;
+    }
+
+    .share-buttons { display: flex; gap: 0.5rem; margin-left: 0.5rem; }
+    .share-btn {
+      width: 38px; height: 38px; border-radius: 50%; background: var(--surface-light);
+      border: 1px solid var(--border-light); display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary); cursor: pointer;
+    }
+    .share-btn:hover { background: var(--accent); color: white; }
+
+    footer { margin-top: 4rem; padding: 1.5rem 0; border-top: 1px solid var(--border-light); text-align: center; }
+    .social-links { display: flex; justify-content: center; gap: 1.8rem; margin-bottom: 1rem; }
+
+    .whatsapp-chat { position: fixed; bottom: 25px; right: 25px; z-index: 998; }
+    .whatsapp-button {
+      background: #25D366; width: 55px; height: 55px; border-radius: 30px;
+      display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(37,211,102,0.4);
+    }
+
+    .admin-only { display: none; }
+    body.admin-mode .admin-only { display: block; }
+    body.admin-mode .admin-only-inline { display: inline-flex; }
+    body.admin-mode [contenteditable="true"] { outline: 2px dashed var(--accent); background: rgba(37,99,235,0.05); border-radius: 6px; padding: 0.1rem 0.3rem; }
+
+    .protected-badge {
+      margin-left: 1rem; font-size: 0.75rem; background: var(--surface-light);
+      padding: 0.25rem 1rem; border-radius: 30px; backdrop-filter: blur(8px);
+    }
+    .sync-status {
+      font-size: 0.7rem; margin-left: 1rem; padding: 0.2rem 0.8rem; border-radius: 30px;
+      background: rgba(37,99,235,0.2); display: inline-flex; align-items: center; gap: 5px;
+    }
+    .cv-status-badge {
+      display: inline-block; font-size: 0.7rem; margin-left: 10px; padding: 2px 8px;
+      border-radius: 12px; background: #e2e8f0; color: #1e293b;
+    }
+    body.dark .cv-status-badge { background: #334155; color: #f1f5f9; }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 1rem; }
+      .hero { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+      .navbar { flex-direction: column; }
+      .nav-links { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
+      h2:after { left: 50%; transform: translateX(-50%); }
+      h2 { text-align: center; display: block; }
+      .stats-mini { justify-content: center; }
+      .profile-frame { width: 260px; height: 260px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-outline" id="cursorOutline"></div>
+  <div class="bg-blob blob-1"></div><div class="bg-blob blob-2"></div><div class="bg-blob blob-3"></div>
+
+<div class="container">
+  <nav class="navbar">
+    <div class="logo">RG</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li><li><a href="#skills">Skills</a></li><li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#documents">Credentials</a></li><li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="action-buttons">
+      <button class="btn-icon" id="darkModeToggle"><i class="fas fa-moon"></i> Dark</button>
+      <button class="btn-icon" id="cursorToggleBtn" title="Toggle custom cursor"><i class="fas fa-mouse-pointer"></i> Cursor</button>
+      <button class="btn-icon" id="adminToggleBtn"><i class="fas fa-user-lock"></i> Admin</button>
+      <button class="btn-icon admin-only" id="logoutAdminBtn" style="display:none;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      <span id="syncIndicator" class="sync-status"><i class="fas fa-cloud-sun"></i> Local storage</span>
+    </div>
+  </nav>
+
+  <section id="home" class="hero fade-section">
+    <div class="hero-content">
+      <div class="hero-badge"><i class="fas fa-bolt"></i> <span id="typed-role"></span></div>
+      <h1>Hi, I'm <span class="gradient-name" id="editableName">Odhiambo Rodriguez George</span></h1>
+      <p id="editableSummary">Finance student, certified Project Manager, and pioneer of a live, smoothly running app. I blend analytical finance, leadership, and tech to deliver real-world solutions.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary"><i class="fas fa-paper-plane"></i> Work with me</a>
+        <button id="viewCvBtn" class="btn-outline"><i class="fas fa-eye"></i> View CV</button>
+        <button id="downloadCvBtn" class="btn-outline"><i class="fas fa-download"></i> Download CV</button>
+        <div class="share-buttons">
+          <button class="share-btn" id="shareLinkedIn"><i class="fab fa-linkedin-in"></i></button>
+          <button class="share-btn" id="shareTwitter"><i class="fab fa-x-twitter"></i></button>
+          <button class="share-btn" id="shareWhatsApp"><i class="fab fa-whatsapp"></i></button>
+        </div>
+      </div>
+      <div class="stats-mini">
+        <div class="stat-item"><span class="stat-number">3+</span> <span class="stat-label">Years Exp</span></div>
+        <div class="stat-item"><span class="stat-number">15+</span> <span class="stat-label">Projects</span></div>
+        <div class="stat-item"><span class="stat-number">100%</span> <span class="stat-label">Satisfaction</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="profile-frame">
+        <img id="profileImage" src="https://ui-avatars.com/api/?name=Odhiambo+Rodriguez+George&background=2563eb&color=fff&size=340&bold=true" alt="Rodriguez George">
+      </div>
+      <div class="admin-only" style="margin-top:1rem; text-align:center;">
+        <input type="file" id="adminPhotoUpload" accept="image/*" style="display:none;">
+        <button class="btn-outline" id="adminPhotoBtn"><i class="fas fa-camera"></i> Change Photo</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="fade-section">
+    <div class="section-header"><div class="section-icon"><i class="fas fa-chart-pie"></i></div><h2>Core Competencies</h2></div>
+    <div class="skills-grid" id="skillsGrid"></div>
+    <div class="admin-only" style="text-align:center; margin-top:1rem;"><button class="add-btn" id="addSkillBtn"><i class="fas fa-plus-circle"></i> Add Skill Category</button></div>
+  </section>
+
+  <section id="experience" class="fade-section">
+    <div class="section-header"><div class="section-icon"><i class="fas fa-briefcase"></i></div><h2>Professional Journey</h2></div>
+    <div class="timeline" id="timelineContainer"></div>
+    <div class="admin-only" style="text-align:center; margin-top:1rem;"><button class="add-btn" id="addTimelineBtn"><i class="fas fa-plus-circle"></i> Add Experience</button></div>
+  </section>
+
+  <section id="projects" class="fade-section">
+    <div class="section-header"><div class="section-icon"><i class="fas fa-rocket"></i></div><h2>Featured Work</h2></div>
+    <div class="projects-grid" id="projectsGrid"></div>
+    <div class="admin-only" style="text-align:center; margin-top:1rem;"><button class="add-btn" id="addProjectBtn"><i class="fas fa-plus-circle"></i> Add Project</button></div>
+  </section>
+
+  <section id="testimonials" class="fade-section">
+    <div class="section-header"><div class="section-icon"><i class="fas fa-comment-dots"></i></div><h2>What people say</h2></div>
+    <div class="testimonials-grid" id="testimonialsGrid"></div>
+    <div class="admin-only" style="text-align:center; margin-top:1rem;"><button class="add-btn" id="addTestimonialBtn"><i class="fas fa-plus-circle"></i> Add Testimonial</button></div>
+  </section>
+
+  <section id="documents" class="fade-section">
+    <div class="section-header"><div class="section-icon"><i class="fas fa-certificate"></i></div><h2>Credentials & Documents</h2><span class="protected-badge"><i class="fas fa-lock"></i> Password Protected</span></div>
+    <div class="documents-grid">
+      <div class="document-card"><i class="fas fa-file-alt"></i><h3>Recommendation Letter</h3><p>Professional recommendation from previous employer/mentor.</p><div class="doc-actions"><button class="doc-btn" id="viewRecLetter"><i class="fas fa-eye"></i> View</button><button class="doc-btn" id="downloadRecLetter"><i class="fas fa-download"></i> Download</button></div><div class="admin-only" style="margin-top:1rem;"><input type="file" id="adminRecUpload" accept=".pdf" style="display:none;"><button class="doc-btn" id="adminRecBtn"><i class="fas fa-upload"></i> Upload PDF</button></div></div>
+      <div class="document-card"><i class="fas fa-shield-alt"></i><h3>Certificate of Good Conduct</h3><p>Police clearance certificate / background check.</p><div class="doc-actions"><button class="doc-btn" id="viewGoodConduct"><i class="fas fa-eye"></i> View</button><button class="doc-btn" id="downloadGoodConduct"><i class="fas fa-download"></i> Download</button></div><div class="admin-only" style="margin-top:1rem;"><input type="file" id="adminConductUpload" accept=".pdf" style="display:none;"><button class="doc-btn" id="adminConductBtn"><i class="fas fa-upload"></i> Upload PDF</button></div></div>
+    </div>
+    <!-- CV Upload with Status -->
+    <div class="admin-only" style="text-align:center; margin-top:1rem; display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+      <input type="file" id="adminCvUpload" accept=".pdf" style="display:none;">
+      <button class="btn-outline" id="adminCvBtn"><i class="fas fa-file-pdf"></i> Upload CV (PDF)</button>
+      <span id="cvStatus" class="cv-status-badge">No CV uploaded</span>
+    </div>
+    <div class="admin-only settings-card"><h3><i class="fas fa-key"></i> Password Settings</h3><div class="settings-field"><label>Admin Login Password</label><input type="text" id="adminPasswordInput" placeholder="Enter new admin password"><button class="doc-btn" id="updateAdminPasswordBtn" style="margin-top:0.5rem;">Update Admin Password</button></div><div class="settings-field"><label>Document Access Password</label><input type="text" id="docPasswordInput" placeholder="Enter new document password"><button class="doc-btn" id="updateDocPasswordBtn" style="margin-top:0.5rem;">Update Document Password</button></div><p style="font-size:0.7rem; opacity:0.7;">Passwords are stored locally in your browser.</p></div>
+  </section>
+
+  <section id="contact" class="fade-section">
+    <div class="section-header"><div class="section-icon"><i class="fas fa-envelope-open-text"></i></div><h2>Let's connect</h2></div>
+    <div class="contact-form"><div class="form-group"><input type="text" id="userName" placeholder="Your name"></div><div class="form-group"><input type="email" id="userEmail" placeholder="Email address"></div><div class="form-group"><textarea id="userMessage" rows="4" placeholder="Tell me about your project..."></textarea></div><button id="sendEmailBtn" class="submit-btn">Send message</button><p id="formStatus" style="margin-top:1rem; text-align:center;"></p></div>
+    <div style="max-width:680px; margin:0 auto;"><div class="contact-options"><a href="https://wa.me/254792524333" target="_blank" class="contact-option-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a><a href="tel:+254792524333" class="contact-option-btn"><i class="fas fa-phone"></i> Call</a><a href="#" class="contact-option-btn"><i class="fab fa-linkedin"></i> LinkedIn</a><a href="mailto:rodriguezgeorge089@gmail.com" class="contact-option-btn"><i class="fas fa-envelope"></i> Email</a></div></div>
+  </section>
+</div>
+<footer><div class="container"><div class="social-links"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fab fa-github"></i></a><a href="#"><i class="fab fa-instagram"></i></a></div><p>© 2025 Odhiambo Rodriguez George · Nairobi, Kenya · <i class="fas fa-heart" style="color: #ec4899;"></i> Built with local storage</p></div></footer>
+<div class="whatsapp-chat"><div class="whatsapp-button" id="whatsappButton"><i class="fab fa-whatsapp fa-2x" style="color:white;"></i></div></div>
+
+<script>
+  (function(){
+    // ========== STATE (all stored in localStorage) ==========
+    let skillsData = [], timelineData = [], projectsData = [], testimonialsData = [];
+    let profileImageURL = null, cvFileURL = null, recLetterURL = null, goodConductURL = null;
+    let ADMIN_PASSWORD = "admin123", DOCUMENT_PASSWORD = "Rodriguez2025";
+    let adminMode = false;
+
+    // ========== DEFAULT CONTENT ==========
+    function defaultSkills() {
+      return [
+        { title: "Financial Analysis", items: [{ name: "Financial Reporting", percent: 90 }, { name: "Budgeting & Forecasting", percent: 85 }, { name: "Risk Management", percent: 80 }] },
+        { title: "Tools & Software", items: [{ name: "Excel (Advanced)", percent: 90 }, { name: "QuickBooks", percent: 75 }, { name: "Financial Modeling", percent: 70 }] },
+        { title: "Project Leadership", items: [{ name: "Agile / Scrum", percent: 85 }, { name: "Team Management", percent: 88 }, { name: "Stakeholder Comm", percent: 82 }] }
+      ];
+    }
+    function defaultTimeline() {
+      return [
+        { title: "Project Manager", date: "Digital Distribution Solutions · 2023 – Present", desc: "Leading cross‑functional teams, improving delivery efficiency by 30%." },
+        { title: "Founder & App Creator", date: "FinTrack App · 2024 – Present", desc: "Built and deployed a live financial tracking app with 500+ users." },
+        { title: "BCom Finance", date: "Multimedia University · 2022 – 2026", desc: "Specialization in investment analysis and corporate finance." },
+        { title: "CPA Foundation", date: "United Institute · Ongoing", desc: "Financial accounting, business law, and management." }
+      ];
+    }
+    function defaultProjects() {
+      return [
+        { title: "FinTrack App", desc: "Live personal finance app with budget analytics. Smooth UI, real‑time sync.", featured: true },
+        { title: "Investment Portfolio Simulator", desc: "Simulated multi‑asset portfolio with risk metrics and Sharpe ratio.", featured: false },
+        { title: "Financial Literacy Workshop", desc: "Trained 200+ individuals on budgeting and saving strategies.", featured: false }
+      ];
+    }
+    function defaultTestimonials() {
+      return [
+        { text: "Rodriguez managed our finance transformation with exceptional clarity and leadership.", author: "Kennedy Abende", role: "Manager, Medio-care" },
+        { text: "The app he built is intuitive and saved us hours of manual work.", author: "Evans Sande", role: "Director, DDS" },
+        { text: "A natural problem‑solver. His analysis directly improved our bottom line.", author: "Anonymous", role: "Finance Director" }
+      ];
+    }
+
+    // ========== UPDATE CV STATUS INDICATOR ==========
+    function updateCvStatus() {
+      const statusEl = document.getElementById('cvStatus');
+      if (cvFileURL) {
+        statusEl.innerHTML = '<i class="fas fa-check-circle"></i> CV uploaded';
+        statusEl.style.background = '#10b981';
+        statusEl.style.color = 'white';
+      } else {
+        statusEl.innerHTML = 'No CV uploaded';
+        statusEl.style.background = '';
+        statusEl.style.color = '';
+      }
+    }
+
+    // ========== LOAD FROM localStorage ==========
+    function loadData() {
+      try {
+        skillsData = JSON.parse(localStorage.getItem('portfolio_skills')) || defaultSkills();
+        timelineData = JSON.parse(localStorage.getItem('portfolio_timeline')) || defaultTimeline();
+        projectsData = JSON.parse(localStorage.getItem('portfolio_projects')) || defaultProjects();
+        testimonialsData = JSON.parse(localStorage.getItem('portfolio_testimonials')) || defaultTestimonials();
+        ADMIN_PASSWORD = localStorage.getItem('portfolio_adminPass') || "admin123";
+        DOCUMENT_PASSWORD = localStorage.getItem('portfolio_docPass') || "Rodriguez2025";
+        
+        const savedImg = localStorage.getItem('portfolio_profileImage');
+        if (savedImg) {
+          profileImageURL = savedImg;
+          document.getElementById('profileImage').src = savedImg;
+        }
+        
+        cvFileURL = localStorage.getItem('portfolio_cv') || null;
+        recLetterURL = localStorage.getItem('portfolio_recLetter') || null;
+        goodConductURL = localStorage.getItem('portfolio_goodConduct') || null;
+        
+        const savedName = localStorage.getItem('portfolio_name');
+        if (savedName) document.getElementById('editableName').innerText = savedName;
+        const savedSummary = localStorage.getItem('portfolio_summary');
+        if (savedSummary) document.getElementById('editableSummary').innerText = savedSummary;
+      } catch (e) {
+        console.warn("Failed to load from localStorage", e);
+        skillsData = defaultSkills();
+        timelineData = defaultTimeline();
+        projectsData = defaultProjects();
+        testimonialsData = defaultTestimonials();
+      }
+      updateCvStatus();
+      refreshUI();
+    }
+
+    // ========== SAVE EVERYTHING TO localStorage ==========
+    function saveAllData() {
+      try {
+        localStorage.setItem('portfolio_skills', JSON.stringify(skillsData));
+        localStorage.setItem('portfolio_timeline', JSON.stringify(timelineData));
+        localStorage.setItem('portfolio_projects', JSON.stringify(projectsData));
+        localStorage.setItem('portfolio_testimonials', JSON.stringify(testimonialsData));
+        localStorage.setItem('portfolio_adminPass', ADMIN_PASSWORD);
+        localStorage.setItem('portfolio_docPass', DOCUMENT_PASSWORD);
+        localStorage.setItem('portfolio_name', document.getElementById('editableName').innerText);
+        localStorage.setItem('portfolio_summary', document.getElementById('editableSummary').innerText);
+        if (profileImageURL) localStorage.setItem('portfolio_profileImage', profileImageURL);
+        if (cvFileURL) localStorage.setItem('portfolio_cv', cvFileURL);
+        if (recLetterURL) localStorage.setItem('portfolio_recLetter', recLetterURL);
+        if (goodConductURL) localStorage.setItem('portfolio_goodConduct', goodConductURL);
+        
+        updateCvStatus();
+        const indicator = document.getElementById('syncIndicator');
+        indicator.innerHTML = '<i class="fas fa-save"></i> Saved locally';
+        setTimeout(() => indicator.innerHTML = '<i class="fas fa-check-circle"></i> All changes saved', 1500);
+      } catch (e) {
+        alert("Storage quota exceeded. Please clear some browser data.");
+      }
+    }
+
+    // ========== CAPTURE CURRENT EDITS FROM DOM ==========
+    function captureEdits() {
+      const skillCards = document.querySelectorAll('.skill-card');
+      skillsData = Array.from(skillCards).map(card => {
+        const titleEl = card.querySelector('.skill-header span');
+        const title = titleEl ? titleEl.innerText : '';
+        const items = Array.from(card.querySelectorAll('.skill-item')).map(item => {
+          const spans = item.querySelectorAll('.skill-info span');
+          const name = spans[0] ? spans[0].innerText : '';
+          const percentText = spans[1] ? spans[1].innerText : '0%';
+          const percent = parseInt(percentText) || 0;
+          return { name, percent };
+        });
+        return { title, items };
+      });
+
+      const timelineItems = document.querySelectorAll('.timeline-item');
+      timelineData = Array.from(timelineItems).map(item => {
+        const title = item.querySelector('.timeline-title')?.innerText || '';
+        const date = item.querySelector('.timeline-date')?.innerText || '';
+        const desc = item.querySelector('p')?.innerText || '';
+        return { title, date, desc };
+      });
+
+      const projectCards = document.querySelectorAll('.project-card');
+      projectsData = Array.from(projectCards).map(card => {
+        const title = card.querySelector('h3')?.innerText || '';
+        const desc = card.querySelector('p')?.innerText || '';
+        const featured = card.classList.contains('featured-app') || card.querySelector('.featured-badge') !== null;
+        return { title, desc, featured };
+      });
+
+      const testimonialCards = document.querySelectorAll('.testimonial-card');
+      testimonialsData = Array.from(testimonialCards).map(card => {
+        const text = card.querySelector('.testimonial-text')?.innerText || '';
+        const author = card.querySelector('.testimonial-author')?.innerText || '';
+        const role = card.querySelector('.testimonial-role')?.innerText || '';
+        return { text, author, role };
+      });
+
+      saveAllData();
+    }
+
+    // ========== RENDER UI ==========
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+      });
+    }
+
+    function refreshUI() {
+      const skillsGrid = document.getElementById('skillsGrid');
+      skillsGrid.innerHTML = skillsData.map((skill, idx) => `
+        <div class="skill-card" data-idx="${idx}">
+          <div class="skill-header"><i class="fas fa-chart-line"></i> <span contenteditable="${adminMode}">${escapeHtml(skill.title)}</span></div>
+          ${skill.items.map(item => `
+            <div class="skill-item">
+              <div class="skill-info">
+                <span contenteditable="${adminMode}">${escapeHtml(item.name)}</span>
+                <span contenteditable="${adminMode}">${item.percent}%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width:${item.percent}%"></div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `).join('');
+
+      const timelineContainer = document.getElementById('timelineContainer');
+      timelineContainer.innerHTML = timelineData.map((item, idx) => `
+        <div class="timeline-item" data-idx="${idx}">
+          <div class="timeline-title" contenteditable="${adminMode}">${escapeHtml(item.title)}</div>
+          <div class="timeline-date" contenteditable="${adminMode}">${escapeHtml(item.date)}</div>
+          <p contenteditable="${adminMode}">${escapeHtml(item.desc)}</p>
+        </div>
+      `).join('');
+
+      const projectsGrid = document.getElementById('projectsGrid');
+      projectsGrid.innerHTML = projectsData.map((proj, idx) => `
+        <div class="project-card ${proj.featured ? 'featured-app' : ''}" data-idx="${idx}">
+          ${proj.featured ? '<span class="featured-badge">⭐ Featured</span>' : ''}
+          <i class="fas ${proj.featured ? 'fa-rocket' : 'fa-chart-bar'}"></i>
+          <h3 contenteditable="${adminMode}">${escapeHtml(proj.title)}</h3>
+          <p contenteditable="${adminMode}">${escapeHtml(proj.desc)}</p>
+        </div>
+      `).join('');
+
+      const testimonialsGrid = document.getElementById('testimonialsGrid');
+      testimonialsGrid.innerHTML = testimonialsData.map((t, idx) => `
+        <div class="testimonial-card" data-idx="${idx}">
+          <i class="fas fa-quote-left"></i>
+          <div class="testimonial-text" contenteditable="${adminMode}">${escapeHtml(t.text)}</div>
+          <div class="testimonial-author" contenteditable="${adminMode}">${escapeHtml(t.author)}</div>
+          <div class="testimonial-role" contenteditable="${adminMode}">${escapeHtml(t.role)}</div>
+        </div>
+      `).join('');
+
+      if (adminMode) {
+        document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+          el.removeEventListener('input', captureEdits);
+          el.addEventListener('input', captureEdits);
+        });
+      }
+    }
+
+    // ========== ADMIN MODE ==========
+    const adminToggleBtn = document.getElementById('adminToggleBtn');
+    const logoutAdminBtn = document.getElementById('logoutAdminBtn');
+    const adminOnlyElements = document.querySelectorAll('.admin-only');
+
+    function enableAdminMode() {
+      adminMode = true;
+      document.body.classList.add('admin-mode');
+      adminToggleBtn.style.display = 'none';
+      logoutAdminBtn.style.display = 'inline-flex';
+      adminOnlyElements.forEach(el => el.style.display = 'block');
+      refreshUI();
+    }
+
+    function disableAdminMode() {
+      adminMode = false;
+      document.body.classList.remove('admin-mode');
+      adminToggleBtn.style.display = 'inline-flex';
+      logoutAdminBtn.style.display = 'none';
+      adminOnlyElements.forEach(el => el.style.display = 'none');
+      captureEdits();
+      refreshUI();
+    }
+
+    adminToggleBtn.addEventListener('click', () => {
+      const pass = prompt('Enter admin password:');
+      if (pass === ADMIN_PASSWORD) {
+        enableAdminMode();
+      } else if (pass !== null) {
+        alert('Incorrect password.');
+      }
+    });
+
+    logoutAdminBtn.addEventListener('click', disableAdminMode);
+
+    // ========== FILE HANDLING (local base64) ==========
+    function handleImageUpload(file) {
+      if (!file || !file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        profileImageURL = e.target.result;
+        document.getElementById('profileImage').src = profileImageURL;
+        saveAllData();
+        alert('✅ Profile photo updated!');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handlePDFUpload(file, storageKey) {
+      if (!file || file.type !== 'application/pdf') {
+        alert('Please select a PDF file.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = e => {
+        const url = e.target.result;
+        if (storageKey === 'cv') {
+          cvFileURL = url;
+          alert('✅ CV uploaded successfully! Click "View CV" to see it.');
+        } else if (storageKey === 'recLetter') {
+          recLetterURL = url;
+          alert('✅ Recommendation letter uploaded.');
+        } else if (storageKey === 'goodConduct') {
+          goodConductURL = url;
+          alert('✅ Certificate of good conduct uploaded.');
+        }
+        saveAllData();
+        updateCvStatus();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    document.getElementById('adminPhotoBtn').addEventListener('click', () => document.getElementById('adminPhotoUpload').click());
+    document.getElementById('adminPhotoUpload').addEventListener('change', e => { if(e.target.files[0]) handleImageUpload(e.target.files[0]); });
+
+    document.getElementById('adminCvBtn').addEventListener('click', () => document.getElementById('adminCvUpload').click());
+    document.getElementById('adminCvUpload').addEventListener('change', e => { if(e.target.files[0]) handlePDFUpload(e.target.files[0], 'cv'); });
+
+    document.getElementById('adminRecBtn').addEventListener('click', () => document.getElementById('adminRecUpload').click());
+    document.getElementById('adminRecUpload').addEventListener('change', e => { if(e.target.files[0]) handlePDFUpload(e.target.files[0], 'recLetter'); });
+
+    document.getElementById('adminConductBtn').addEventListener('click', () => document.getElementById('adminConductUpload').click());
+    document.getElementById('adminConductUpload').addEventListener('change', e => { if(e.target.files[0]) handlePDFUpload(e.target.files[0], 'goodConduct'); });
+
+    // ========== ADD BUTTONS ==========
+    document.getElementById('addSkillBtn').addEventListener('click', () => {
+      const title = prompt('Skill category name:');
+      if (title) {
+        skillsData.push({ title, items: [{ name: 'New Skill', percent: 50 }] });
+        saveAllData();
+        refreshUI();
+      }
+    });
+
+    document.getElementById('addTimelineBtn').addEventListener('click', () => {
+      const title = prompt('Title:');
+      if (title) {
+        const date = prompt('Date:') || '';
+        const desc = prompt('Description:') || '';
+        timelineData.push({ title, date, desc });
+        saveAllData();
+        refreshUI();
+      }
+    });
+
+    document.getElementById('addProjectBtn').addEventListener('click', () => {
+      const title = prompt('Project title:');
+      if (title) {
+        const desc = prompt('Description:') || '';
+        const featured = confirm('Mark as featured?');
+        projectsData.push({ title, desc, featured });
+        saveAllData();
+        refreshUI();
+      }
+    });
+
+    document.getElementById('addTestimonialBtn').addEventListener('click', () => {
+      const text = prompt('Testimonial text:');
+      if (text) {
+        const author = prompt('Author:') || 'Anonymous';
+        const role = prompt('Role:') || '';
+        testimonialsData.push({ text, author, role });
+        saveAllData();
+        refreshUI();
+      }
+    });
+
+    // ========== PASSWORD UPDATES ==========
+    document.getElementById('updateAdminPasswordBtn').addEventListener('click', () => {
+      const newPass = document.getElementById('adminPasswordInput').value.trim();
+      if (newPass) {
+        ADMIN_PASSWORD = newPass;
+        saveAllData();
+        alert('Admin password updated.');
+        document.getElementById('adminPasswordInput').value = '';
+      }
+    });
+
+    document.getElementById('updateDocPasswordBtn').addEventListener('click', () => {
+      const newPass = document.getElementById('docPasswordInput').value.trim();
+      if (newPass) {
+        DOCUMENT_PASSWORD = newPass;
+        saveAllData();
+        alert('Document password updated.');
+        document.getElementById('docPasswordInput').value = '';
+      }
+    });
+
+    // ========== CV & DOCUMENT ACTIONS ==========
+    function verifyPassword(action) {
+      const p = prompt(`🔐 Enter password to ${action}:`);
+      if (p === DOCUMENT_PASSWORD) return true;
+      if (p !== null) alert('Wrong password.');
+      return false;
+    }
+
+    function openDoc(url, view, filename) {
+      if (!url) {
+        alert('No document uploaded yet. Please upload a file first.');
+        return;
+      }
+      
+      // For base64 PDFs, create a Blob and open in new tab for better compatibility
+      if (url.startsWith('data:application/pdf')) {
+        try {
+          // Convert data URL to Blob
+          const byteString = atob(url.split(',')[1]);
+          const mimeType = url.split(',')[0].split(':')[1].split(';')[0];
+          const ab = new ArrayBuffer(byteString.length);
+          const ia = new Uint8Array(ab);
+          for (let i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+          }
+          const blob = new Blob([ab], { type: mimeType });
+          const blobUrl = URL.createObjectURL(blob);
+          
+          if (view) {
+            window.open(blobUrl, '_blank');
+          } else {
+            const a = document.createElement('a');
+            a.href = blobUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
+          }
+          return;
+        } catch (e) {
+          console.warn('Blob conversion failed, falling back to direct open', e);
+        }
+      }
+      
+      // Fallback for other types or if Blob fails
+      if (view) {
+        window.open(url, '_blank');
+      } else {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+      }
+    }
+
+    document.getElementById('viewCvBtn').addEventListener('click', () => openDoc(cvFileURL, true, 'Rodriguez_George_CV.pdf'));
+    document.getElementById('downloadCvBtn').addEventListener('click', () => openDoc(cvFileURL, false, 'Rodriguez_George_CV.pdf'));
+
+    document.getElementById('viewRecLetter').addEventListener('click', () => {
+      if (verifyPassword('view recommendation letter')) openDoc(recLetterURL, true, 'Recommendation_Letter.pdf');
+    });
+    document.getElementById('downloadRecLetter').addEventListener('click', () => {
+      if (verifyPassword('download recommendation letter')) openDoc(recLetterURL, false, 'Recommendation_Letter.pdf');
+    });
+
+    document.getElementById('viewGoodConduct').addEventListener('click', () => {
+      if (verifyPassword('view certificate')) openDoc(goodConductURL, true, 'Certificate_of_Good_Conduct.pdf');
+    });
+    document.getElementById('downloadGoodConduct').addEventListener('click', () => {
+      if (verifyPassword('download certificate')) openDoc(goodConductURL, false, 'Certificate_of_Good_Conduct.pdf');
+    });
+
+    // ========== MISC ==========
+    document.getElementById('sendEmailBtn').addEventListener('click', async () => {
+      const name = document.getElementById('userName').value;
+      const email = document.getElementById('userEmail').value;
+      const msg = document.getElementById('userMessage').value;
+      if (!name || !email || !msg) {
+        document.getElementById('formStatus').innerText = 'Please fill all fields.';
+        return;
+      }
+      document.getElementById('formStatus').innerText = 'Sending...';
+      try {
+        await fetch('https://formspree.io/f/mzdyjogv', {
+          method: 'POST',
+          body: new FormData([['name', name], ['email', email], ['message', msg]]),
+          headers: { 'Accept': 'application/json' }
+        });
+        document.getElementById('formStatus').innerText = 'Message sent!';
+        canvasConfetti({ particleCount: 100 });
+      } catch (e) {
+        window.location.href = `mailto:rodriguezgeorge089@gmail.com?subject=Portfolio message&body=${encodeURIComponent(msg)}`;
+      }
+    });
+
+    document.getElementById('whatsappButton').addEventListener('click', () => window.open('https://wa.me/254792524333'));
+    document.getElementById('shareLinkedIn').addEventListener('click', () => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(location.href)}`));
+    document.getElementById('shareTwitter').addEventListener('click', () => window.open(`https://twitter.com/intent/tweet?text=Check%20out%20this%20portfolio&url=${encodeURIComponent(location.href)}`));
+    document.getElementById('shareWhatsApp').addEventListener('click', () => window.open(`https://wa.me/?text=${encodeURIComponent(location.href)}`));
+
+    // Dark mode
+    const darkToggle = document.getElementById('darkModeToggle');
+    if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+    darkToggle.onclick = () => {
+      document.body.classList.toggle('dark');
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    };
+
+    // Fade sections
+    const sections = document.querySelectorAll('.fade-section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+    }, { threshold: 0.1 });
+    sections.forEach(s => observer.observe(s));
+
+    // Typed.js
+    new Typed('#typed-role', {
+      strings: ['Finance Student', 'Certified Project Manager', 'App Creator', 'Financial Analyst'],
+      typeSpeed: 60,
+      backSpeed: 40,
+      loop: true
+    });
+
+    // Custom cursor
+    (function initCursor() {
+      const body = document.body;
+      const dot = document.getElementById('cursorDot');
+      const outline = document.getElementById('cursorOutline');
+      const toggle = document.getElementById('cursorToggleBtn');
+      let enabled = localStorage.getItem('customCursor') !== 'false';
+      function enable() {
+        body.classList.add('custom-cursor-active');
+        localStorage.setItem('customCursor', 'true');
+        if (toggle) toggle.innerHTML = '<i class="fas fa-mouse-pointer"></i> Cursor On';
+      }
+      function disable() {
+        body.classList.remove('custom-cursor-active');
+        localStorage.setItem('customCursor', 'false');
+        if (toggle) toggle.innerHTML = '<i class="fas fa-mouse-pointer"></i> Cursor Off';
+      }
+      if (enabled) enable(); else disable();
+      if (toggle) toggle.onclick = () => body.classList.contains('custom-cursor-active') ? disable() : enable();
+      let mx = 0, my = 0, dx = 0, dy = 0, ox = 0, oy = 0;
+      document.onmousemove = e => { mx = e.clientX; my = e.clientY; };
+      function anim() {
+        dx += (mx - dx) * 0.15;
+        dy += (my - dy) * 0.15;
+        ox += (mx - ox) * 0.12;
+        oy += (my - oy) * 0.12;
+        if (body.classList.contains('custom-cursor-active')) {
+          dot.style.left = dx + 'px';
+          dot.style.top = dy + 'px';
+          outline.style.left = ox + 'px';
+          outline.style.top = oy + 'px';
+        }
+        requestAnimationFrame(anim);
+      }
+      anim();
+    })();
+
+    // Start everything
+    loadData();
+  })();
+</script>
+</body>
+</html>
